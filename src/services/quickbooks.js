@@ -56,7 +56,7 @@ function createQuickBooksClient({ clientId, clientSecret, redirectUri, environme
     const { accessToken, accessTokenExpiresAt, refreshToken } = tokenStore.get();
     if (accessToken && accessTokenExpiresAt > Date.now()) return accessToken;
     if (!refreshToken) {
-      throw new HttpError(401, 'QuickBooks is not connected: visit /auth/quickbooks/connect or set QBO_REFRESH_TOKEN');
+      throw new HttpError(401, 'QuickBooks is not connected: open the URL from GET /api/quickbooks/connect-url or set QBO_REFRESH_TOKEN');
     }
     const body = await requestToken({ grant_type: 'refresh_token', refresh_token: refreshToken });
     return body.access_token;
