@@ -21,6 +21,12 @@ module.exports = {
     minorVersion: env.QBO_MINOR_VERSION || '75',
     tokenFile: env.QBO_TOKEN_FILE || '.qbo-tokens.json',
   },
+  auth: {
+    tenantId: env.AZURE_TENANT_ID,
+    clientId: env.AZURE_API_CLIENT_ID,
+    requiredScope: env.AZURE_API_SCOPE || 'access_as_user',
+    requiredAppRole: env.AZURE_API_APP_ROLE || 'VendorLinks.Access',
+  },
   samsara: {
     apiToken: env.SAMSARA_API_TOKEN,
     baseUrl: env.SAMSARA_BASE_URL || 'https://api.samsara.com',

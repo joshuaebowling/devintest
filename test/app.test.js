@@ -30,8 +30,12 @@ function fakeRepo() {
 
 function buildApp() {
   return createApp({
+    authenticate: (req, res, next) => next(),
     vendorLinkRepo: fakeRepo(),
-    quickbooks: { listVendors: async () => [{ id: '1', name: 'QB Vendor' }] },
+    quickbooks: {
+      listVendors: async () => [{ id: '1', name: 'QB Vendor' }],
+      getAuthorizationUrl: () => 'https://appcenter.intuit.com/connect/oauth2?state=x',
+    },
     samsara: { listVendors: async () => [{ id: 'abc', name: 'Samsara Vendor' }] },
   });
 }
@@ -67,4 +71,6 @@ test('external vendor endpoints', async () => {
   assert.equal(qb.body[0].name, 'QB Vendor');
   const ss = await request(app).get('/api/samsara/vendors').expect(200);
   assert.equal(ss.body[0].name, 'Samsara Vendor');
+  const connect = await request(app).get('/api/quickbooks/connect-url').expect(200);
+  assert.match(connect.body.url, /^https:\/\/appcenter\.intuit\.com\//);
 });
