@@ -1,0 +1,24 @@
+{
+  "name": "vendor-link-service",
+  "version": "1.0.0",
+  "description": "Links QuickBooks Online vendors to Samsara vendors. MySQL (stored procedures) + Node.js/Express.",
+  "main": "src/server.js",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:migrate": "node scripts/migrate.js",
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.1"
+  }
+}
